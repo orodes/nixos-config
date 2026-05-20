@@ -39,8 +39,11 @@
       size = "36G";
 
       content = {
-        type = "swap";
-        resumeDevice = true;
+        type = "luks";
+        name = "cryptswap";
+        settings.keyFile = "/tmp/swap.key";
+
+        content.type = "swap";
       };
     };
 
@@ -49,24 +52,29 @@
       size = "100%";
 
       content = {
-        type = "btrfs";
-        extraArgs = [ "-f" ];
+        type = "luks";
+        name = "cryptroot";
 
-        subvolumes = {
-          "/persistent" = {
-            mountOptions = [
-              "subvol=persistent"
-              "noatime"
-            ];
-            mountpoint = "/persistent";
-          };
+        content = {
+          type = "btrfs";
+          extraArgs = [ "-f" ];
 
-          "/nix" = {
-            mountOptions = [
-              "subvol=nix"
-              "noatime"
-            ];
-            mountpoint = "/nix";
+          subvolumes = {
+            "/persistent" = {
+              mountOptions = [
+                "subvol=persistent"
+                "noatime"
+              ];
+              mountpoint = "/persistent";
+            };
+
+            "/nix" = {
+              mountOptions = [
+                "subvol=nix"
+                "noatime"
+              ];
+              mountpoint = "/nix";
+            };
           };
         };
       };
