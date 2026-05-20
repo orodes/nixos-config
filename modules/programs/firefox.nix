@@ -92,7 +92,6 @@
                 cloudStorageEnabled = lib.mkForce false;
 
                 importedLists = [
-                  "https://filters.adtidy.org/extension/ublock/filters/3.txt"
                   "https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
                   "https://cdn.jsdelivr.net/gh/BevizLaszlo/UBlock-Filters-for-Social-Media@latest/filterlist.txt"
                 ];
@@ -117,6 +116,7 @@
                 "ublock-cookies-adguard"
                 "ublock-cookies-easylist"
                 "https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+                "https://cdn.jsdelivr.net/gh/BevizLaszlo/UBlock-Filters-for-Social-Media@latest/filterlist.txt"
                 "plowe-0"
                 "ublock-abuse"
                 "ublock-badware"
