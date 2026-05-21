@@ -15,12 +15,23 @@
           "video"
         ];
         shell = pkgs.fish;
-        hashedPasswordFile = config.age.secrets.nadeko-password.path;
       };
 
       age.secrets.nadeko-password = {
         file = inputs.secrets + "/nadeko-password.age";
-        owner = "nadeko";
+      };
+
+      systemd.services.nadeko-password = {
+        description = "Set nadeko password from agenix secret";
+        wantedBy = [ "multi-user.target" ];
+        path = [ pkgs.shadow ];
+        script = ''
+          echo "nadeko:$(cat ${config.age.secrets.nadeko-password.path})" | chpasswd -e
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
       };
 
       age.secrets.git-identity-personal = {

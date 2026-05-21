@@ -17,6 +17,7 @@
 
       networking.hostName = "sengoku";
       security.sudo.wheelNeedsPassword = false;
+      fileSystems."/persistent".neededForBoot = true;
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
