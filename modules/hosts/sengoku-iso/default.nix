@@ -21,10 +21,10 @@
       '';
 
       environment.etc."installer-key" = {
-        source = /home/nadeko/.ssh/installer-key;
+        source = inputs.self + "/keys/installer-key";
         mode = "0600";
       };
-      environment.etc."installer-key.pub".source = /home/nadeko/.ssh/installer-key.pub;
+      environment.etc."installer-key.pub".source = inputs.self + "/keys/installer-key.pub";
 
       environment.systemPackages = [
         pkgs.disko
