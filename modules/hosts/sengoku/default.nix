@@ -18,6 +18,7 @@
       networking.hostName = "sengoku";
       security.sudo.wheelNeedsPassword = false;
       fileSystems."/persistent".neededForBoot = true;
+      systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
