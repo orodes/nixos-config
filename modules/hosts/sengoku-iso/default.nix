@@ -55,6 +55,10 @@
           shred -u /tmp/swap.key
 
           echo "=== Installing NixOS ==="
+          mkdir -p /mnt/etc/ssh
+          cp /mnt/persistent/etc/ssh/ssh_host_ed25519_key     /mnt/etc/ssh/
+          cp /mnt/persistent/etc/ssh/ssh_host_ed25519_key.pub /mnt/etc/ssh/
+          chmod 600 /mnt/etc/ssh/ssh_host_ed25519_key
           nixos-install --flake github:orodes/nixos-config#sengoku --no-root-passwd
 
           echo "=== Setting up host SSH keys ==="
@@ -72,7 +76,7 @@
           chmod 700 /mnt/persistent/home/nadeko/.ssh
           chmod 600 /mnt/persistent/home/nadeko/.ssh/id_ed25519
           chmod 600 /mnt/persistent/home/nadeko/.ssh/authorized_keys
-          nixos-enter --root /mnt -- chown -R nadeko:users /home/nadeko/.ssh
+          chown -R 1000:1000 /mnt/persistent/home/nadeko/.ssh
 
           echo ""
           echo "=== Done ==="
