@@ -22,7 +22,7 @@
 
       environment.etc."installer-key" = {
         source = builtins.path {
-          path = builtins.toPath (builtins.getEnv "PWD" + "/keys/installer-key")
+          path = builtins.toPath (builtins.getEnv "PWD" + "/keys/installer-key");
           name = "installer-key";
         };
         mode = "0600";
