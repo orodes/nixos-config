@@ -34,6 +34,7 @@
           ".mozilla"
           ".local/share/Anki2"
           ".local/share/local-audio-yomichan"
+          ".cache/noctalia"
         ];
       };
     };
