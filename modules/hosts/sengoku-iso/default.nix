@@ -14,7 +14,7 @@
 
       networking.networkmanager.enable = true;
 
-      environment.etc."root/.ssh/config".text = ''
+      programs.ssh.extraConfig = ''
         Host github.com
           IdentityFile /etc/installer-key
           StrictHostKeyChecking accept-new
