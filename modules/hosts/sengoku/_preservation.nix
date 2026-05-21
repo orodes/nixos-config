@@ -36,6 +36,8 @@
           ".local/share/local-audio-yomichan"
           ".config/vesktop"
           ".config/nixos-config"
+          ".cache/noctalia"
+          ".cache/firefox"
         ];
       };
     };
