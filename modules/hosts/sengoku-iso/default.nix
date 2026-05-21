@@ -1,4 +1,14 @@
 { inputs, ... }:
+let
+  installerKey = builtins.path {
+    path = builtins.toPath (builtins.getEnv "PWD" + "/keys/installer-key");
+    name = "installer-key";
+  };
+  sengokuHostKey = builtins.path {
+    path = builtins.toPath (builtins.getEnv "PWD" + "/keys/sengoku-host-key");
+    name = "sengoku-host-key";
+  };
+in
 {
   flake.modules.nixos.sengoku-iso =
     { pkgs, ... }:
@@ -20,22 +30,12 @@
           StrictHostKeyChecking accept-new
       '';
 
-      environment.etc."installer-key" = {
-        source = builtins.path {
-          path = builtins.toPath (builtins.getEnv "PWD" + "/keys/installer-key");
-          name = "installer-key";
-        };
-        mode = "0600";
-      };
-      environment.etc."installer-key.pub".source = inputs.self + "/keys/installer-key.pub";
+      system.activationScripts.installer-keys = ''
+        install -Dm600 ${installerKey}   /etc/installer-key
+        install -Dm600 ${sengokuHostKey} /etc/sengoku-host-key
+      '';
 
-      environment.etc."sengoku-host-key" = {
-        source = builtins.path {
-          path = builtins.toPath (builtins.getEnv "PWD" + "/keys/sengoku-host-key");
-          name = "sengoku-host-key";
-        };
-        mode = "0600";
-      };
+      environment.etc."installer-key.pub".source    = inputs.self + "/keys/installer-key.pub";
       environment.etc."sengoku-host-key.pub".source = inputs.self + "/keys/sengoku-host-key.pub";
 
       environment.systemPackages = [
