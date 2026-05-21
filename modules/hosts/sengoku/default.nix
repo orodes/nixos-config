@@ -7,6 +7,7 @@
         sengoku-hardware
         system-desktop
         nadeko
+        secrets
       ] ++ [
         inputs.disko.nixosModules.disko
         inputs.preservation.nixosModules.default
