@@ -29,6 +29,15 @@
       };
       environment.etc."installer-key.pub".source = inputs.self + "/keys/installer-key.pub";
 
+      environment.etc."sengoku-host-key" = {
+        source = builtins.path {
+          path = builtins.toPath (builtins.getEnv "PWD" + "/keys/sengoku-host-key");
+          name = "sengoku-host-key";
+        };
+        mode = "0600";
+      };
+      environment.etc."sengoku-host-key.pub".source = inputs.self + "/keys/sengoku-host-key.pub";
+
       environment.systemPackages = [
         pkgs.disko
         (pkgs.writeShellScriptBin "install-sengoku" ''
@@ -48,6 +57,13 @@
           echo "=== Installing NixOS ==="
           nixos-install --flake github:orodes/nixos-config#sengoku --no-root-passwd
 
+          echo "=== Setting up host SSH keys ==="
+          mkdir -p /mnt/persistent/etc/ssh
+          cp /etc/sengoku-host-key     /mnt/persistent/etc/ssh/ssh_host_ed25519_key
+          cp /etc/sengoku-host-key.pub /mnt/persistent/etc/ssh/ssh_host_ed25519_key.pub
+          chmod 600 /mnt/persistent/etc/ssh/ssh_host_ed25519_key
+          chmod 644 /mnt/persistent/etc/ssh/ssh_host_ed25519_key.pub
+
           echo "=== Setting up SSH access for first boot ==="
           mkdir -p /mnt/persistent/home/nadeko/.ssh
           cp /etc/installer-key     /mnt/persistent/home/nadeko/.ssh/id_ed25519
@@ -56,19 +72,13 @@
           chmod 700 /mnt/persistent/home/nadeko/.ssh
           chmod 600 /mnt/persistent/home/nadeko/.ssh/id_ed25519
           chmod 600 /mnt/persistent/home/nadeko/.ssh/authorized_keys
+          nixos-enter --root /mnt -- chown -R nadeko:users /home/nadeko/.ssh
 
           echo ""
           echo "=== Done ==="
           echo ""
-          echo "Passwords are not usable yet. SSH in with the installer key:"
-          echo "  ssh nadeko@sengoku"
-          echo ""
-          echo "1. Get the host public key:"
-          echo "     cat /persistent/etc/ssh/ssh_host_ed25519_key.pub"
-          echo "2. Add it to secrets.nix in nixos-secrets, re-encrypt, push:"
-          echo "     agenix -r && git push"
-          echo "3. Rebuild:"
-          echo "     nh os switch"
+          echo "SSH in with the installer key:"
+          echo "  ssh -i keys/installer-key nadeko@sengoku"
         '')
       ];
     };
