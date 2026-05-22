@@ -19,6 +19,8 @@
       default-column-width.proportion = 0.5;
     };
 
+    environment.QS_ICON_THEME = "Adwaita";
+
     binds = {
       "Mod+Return".spawn-sh = lib.getExe pkgs.foot;
       "Mod+Q".close-window = _: { };
