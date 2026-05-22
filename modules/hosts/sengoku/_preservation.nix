@@ -32,6 +32,7 @@
           "Documents"
           ".ssh"
           ".mozilla"
+          ".config/mozilla"
           ".local/share/Anki2"
           ".local/share/local-audio-yomichan"
           ".config/vesktop"
