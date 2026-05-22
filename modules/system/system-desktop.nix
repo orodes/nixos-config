@@ -48,6 +48,8 @@
       hardware.bluetooth.settings.General.Experimental = true;
       hardware.bluetooth.settings.LE.ScanType = "active";
 
+      environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
+
       environment.systemPackages = with pkgs; [
         xdg-utils
         brightnessctl
