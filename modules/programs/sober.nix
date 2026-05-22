@@ -7,6 +7,8 @@
     {
       imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
+      environment.sessionVariables.XDG_DATA_DIRS = [ "/var/lib/flatpak/exports/share" ];
+
       services.flatpak = {
         enable = true;
         remotes = [
@@ -15,7 +17,7 @@
             location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
           }
         ];
-        packages = [ "flathub:app/org.vinegarhq.Sober//stable" ];
+        packages = [ { appId = "org.vinegarhq.Sober"; origin = "flathub"; } ];
         update.onActivation = true;
       };
     };
