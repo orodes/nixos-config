@@ -13,6 +13,7 @@
         mpv
         steam
         heroic
+        sober
       ];
 
       users.users.nadeko = {
