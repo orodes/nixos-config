@@ -6,6 +6,7 @@
       directories = [
         "/etc/nixos"
         "/var/lib/bluetooth"
+        "/var/lib/flatpak"
         {
           directory = "/var/lib/nixos";
           inInitrd = true;
@@ -42,6 +43,7 @@
           ".steam"
           ".local/share/Steam"
           ".config/heroic"
+          ".var/app/org.vinegarhq.Sober"
         ];
       };
     };
