@@ -11,6 +11,8 @@
         anki
         loupe
         mpv
+        steam
+        heroic
       ];
 
       users.users.nadeko = {

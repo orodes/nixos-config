@@ -8,6 +8,8 @@
         package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
       };
 
+      environment.systemPackages = [ pkgs.xwayland-satellite ];
+
       services.greetd = {
         enable = true;
         settings.default_session = {

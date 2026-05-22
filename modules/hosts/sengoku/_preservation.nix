@@ -39,6 +39,9 @@
           ".config/nixos-config"
           ".cache/noctalia"
           ".cache/firefox"
+          ".steam"
+          ".local/share/Steam"
+          ".config/heroic"
         ];
       };
     };

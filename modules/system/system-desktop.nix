@@ -37,9 +37,15 @@
           nerd-fonts.jetbrains-mono
         ];
         fontconfig.defaultFonts = {
-          sansSerif = [ "Noto Sans CJK JP" "Noto Sans" ];
+          sansSerif = [
+            "Noto Sans CJK JP"
+            "Noto Sans"
+          ];
           serif = [ "Noto Serif CJK JP" ];
-          monospace = [ "JetBrainsMono Nerd Font Mono" "Noto Sans Mono CJK JP" ];
+          monospace = [
+            "JetBrainsMono Nerd Font Mono"
+            "Noto Sans Mono CJK JP"
+          ];
         };
       };
 
@@ -52,6 +58,7 @@
       environment.systemPackages = with pkgs; [
         xdg-utils
         brightnessctl
+        mission-center
       ];
     };
 }
