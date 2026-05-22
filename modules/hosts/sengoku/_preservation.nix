@@ -32,7 +32,7 @@
           "Documents"
           ".ssh"
           ".mozilla"
-          ".config/mozilla"
+          ".config/mozilla/firefox/default"
           ".local/share/Anki2"
           ".local/share/local-audio-yomichan"
           ".config/vesktop"
