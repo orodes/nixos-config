@@ -7,6 +7,12 @@
   flake.modules.nixos.nadeko =
     { config, pkgs, ... }:
     {
+      imports = with inputs.self.modules.nixos; [
+        anki
+        loupe
+        mpv
+      ];
+
       users.users.nadeko = {
         isNormalUser = true;
         extraGroups = [

@@ -9,7 +9,6 @@
         noctalia
         firefox
         nautilus
-        anki
         fcitx5
       ];
 
