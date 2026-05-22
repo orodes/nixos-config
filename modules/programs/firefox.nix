@@ -1,4 +1,7 @@
 { inputs, ... }:
+let
+  containerUrls = builtins.fromJSON (builtins.readFile (inputs.secrets + "/firefox-container-urls.json"));
+in
 {
   flake.modules.nixos.firefox = {
     home-manager.sharedModules = [
@@ -84,6 +87,12 @@
                 installation_mode = "force_installed";
                 updates_disabled = true;
               };
+
+              "hmc@sashanoraa.gay" = {
+                install_url = moz "hm-containers";
+                installation_mode = "force_installed";
+                updates_disabled = true;
+              };
             };
 
           "3rdparty".Extensions = {
@@ -132,6 +141,48 @@
 
         profiles.default = {
           isDefault = true;
+
+          containersForce = true;
+
+          containers = {
+            university = {
+              id = 1;
+              color = "blue";
+              icon = "briefcase";
+              name = "University";
+            };
+            finance = {
+              id = 2;
+              color = "green";
+              icon = "dollar";
+              name = "Finance";
+            };
+            shopping = {
+              id = 3;
+              color = "orange";
+              icon = "cart";
+              name = "Shopping";
+            };
+            google = {
+              id = 4;
+              color = "red";
+              icon = "circle";
+              name = "Google";
+            };
+            work = {
+              id = 5;
+              color = "yellow";
+              icon = "briefcase";
+              name = "Work";
+            };
+          };
+
+          extensions.settings = {
+            "hmc@sashanoraa.gay" = {
+              force = true;
+              settings.containers = containerUrls;
+            };
+          };
 
           search = {
             force = true;
