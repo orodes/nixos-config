@@ -14,6 +14,7 @@
         steam
         heroic
         sober
+        stremio
       ];
 
       users.users.nadeko = {
@@ -118,7 +119,9 @@
 
       xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 
-      home.packages = with pkgs; [ vesktop ];
+      home.packages = with pkgs; [
+        vesktop
+      ];
 
       programs.noctalia-shell.settings = {
         general.avatarImage = toString (inputs.self + "/assets/nadeko/face.jpg");

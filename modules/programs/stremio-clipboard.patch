@@ -1,0 +1,36 @@
+--- a/src/webview/mod.rs
++++ b/src/webview/mod.rs
+@@ -23,4 +23,4 @@
+ use winit::{
+     event::{KeyEvent, MouseButton, Touch, TouchPhase},
+-    keyboard::{ModifiersState, PhysicalKey},
++    keyboard::{KeyCode, ModifiersState, PhysicalKey},
+ };
+@@ -256,4 +256,27 @@
+     pub fn keyboard_input(&self, key_event: KeyEvent, modifiers: ModifiersState) {
++        if key_event.state.is_pressed()
++            && modifiers.control_key()
++            && key_event.physical_key == PhysicalKey::Code(KeyCode::KeyV)
++        {
++            if let Ok(output) = std::process::Command::new("wl-paste")
++                .args(["--no-newline", "--type", "text/plain"])
++                .output()
++            {
++                if output.status.success() {
++                    let text = String::from_utf8_lossy(&output.stdout);
++                    if let Some(frame) = self.main_frame() {
++                        let escaped =
++                            serde_json::to_string(text.as_ref()).unwrap_or_default();
++                        let script = format!(
++                            "document.execCommand('insertText', false, {escaped})"
++                        );
++                        let code = CefString::from(script.as_str());
++                        frame.execute_java_script(Some(&code), None, 0);
++                    }
++                }
++            }
++            return;
++        }
+         if let Some(host) = self.browser_host() {
+             if let PhysicalKey::Code(code) = key_event.physical_key
+                 && let (Ok(WindowsKeyCode(windows_key_code)), Ok(NativeKeyCode(native_key_code))) =
