@@ -10,6 +10,7 @@
         firefox
         nautilus
         anki
+        fcitx5
       ];
 
       security.polkit.enable = true;
@@ -36,6 +37,11 @@
           noto-fonts-color-emoji
           nerd-fonts.jetbrains-mono
         ];
+        fontconfig.defaultFonts = {
+          sansSerif = [ "Noto Sans CJK JP" "Noto Sans" ];
+          serif = [ "Noto Serif CJK JP" ];
+          monospace = [ "JetBrainsMono Nerd Font Mono" "Noto Sans Mono CJK JP" ];
+        };
       };
 
       hardware.bluetooth.enable = true;
