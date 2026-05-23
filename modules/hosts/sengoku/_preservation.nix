@@ -44,6 +44,7 @@
           ".local/share/Steam"
           ".config/heroic"
           ".var/app/org.vinegarhq.Sober"
+          ".local/share/stremio"
         ];
       };
     };
