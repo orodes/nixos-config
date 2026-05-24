@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.nixos.sioyek =
-    { lib, sioyekScaleFactor ? null, ... }:
+    { lib, ... }:
     {
       nixpkgs.overlays = [
         (final: prev: {
@@ -11,15 +11,10 @@
             nativeBuildInputs = [ final.makeWrapper ];
             postBuild =
               let
-                args = lib.escapeShellArgs (
-                  [ "--set" "QT_QPA_PLATFORM" "xcb" ]
-                  ++ lib.optionals (sioyekScaleFactor != null) [
-                    "--set"
-                    "QT_SCALE_FACTOR"
-                    (toString sioyekScaleFactor)
-                  ]
-                  ++ [ "--prefix" "LD_LIBRARY_PATH" ":" "${final.pipewire}/lib" ]
-                );
+                args = lib.escapeShellArgs [
+                  "--set" "QT_QPA_PLATFORM" "xcb"
+                  "--prefix" "LD_LIBRARY_PATH" ":" "${final.pipewire}/lib"
+                ];
               in
               ''wrapProgram $out/bin/sioyek ${args}'';
           };

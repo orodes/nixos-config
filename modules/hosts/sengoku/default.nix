@@ -15,8 +15,6 @@
         ./_preservation.nix
       ];
 
-      _module.args.sioyekScaleFactor = 1.5;
-
       networking.hostName = "sengoku";
       security.sudo.wheelNeedsPassword = false;
       fileSystems."/persistent".neededForBoot = true;
