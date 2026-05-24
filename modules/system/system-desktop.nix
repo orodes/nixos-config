@@ -10,6 +10,7 @@
         firefox
         nautilus
         fcitx5
+        plymouth
       ];
 
       security.polkit.enable = true;

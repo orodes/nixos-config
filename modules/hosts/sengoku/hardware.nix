@@ -6,6 +6,7 @@
       imports = [ ./_hardware-configuration.nix ];
 
       boot.kernelParams = [ "nvme_core.default_ps_max_latency_us=0" ];
+      boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_drm" ];
 
       hardware.nvidia = {
         modesetting.enable = true;
