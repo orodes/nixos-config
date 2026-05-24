@@ -45,6 +45,7 @@
           ".config/heroic"
           ".var/app/org.vinegarhq.Sober"
           ".local/share/stremio"
+          ".local/share/sioyek"
         ];
       };
     };

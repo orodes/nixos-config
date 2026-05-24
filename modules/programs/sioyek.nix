@@ -1,23 +1,33 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.sioyek = {
-    nixpkgs.overlays = [
-      (final: prev: {
-        sioyek = final.symlinkJoin {
-          name = "sioyek";
-          paths = [ prev.sioyek ];
-          nativeBuildInputs = [ final.makeWrapper ];
-          postBuild = ''
-            wrapProgram $out/bin/sioyek \
-              --set QT_QPA_PLATFORM xcb \
-              --prefix LD_LIBRARY_PATH : ${final.pipewire}/lib
-          '';
-        };
-      })
-    ];
+  flake.modules.nixos.sioyek =
+    { lib, sioyekScaleFactor ? null, ... }:
+    {
+      nixpkgs.overlays = [
+        (final: prev: {
+          sioyek = final.symlinkJoin {
+            name = "sioyek";
+            paths = [ prev.sioyek ];
+            nativeBuildInputs = [ final.makeWrapper ];
+            postBuild =
+              let
+                args = lib.escapeShellArgs (
+                  [ "--set" "QT_QPA_PLATFORM" "xcb" ]
+                  ++ lib.optionals (sioyekScaleFactor != null) [
+                    "--set"
+                    "QT_SCALE_FACTOR"
+                    (toString sioyekScaleFactor)
+                  ]
+                  ++ [ "--prefix" "LD_LIBRARY_PATH" ":" "${final.pipewire}/lib" ]
+                );
+              in
+              ''wrapProgram $out/bin/sioyek ${args}'';
+          };
+        })
+      ];
 
-    home-manager.sharedModules = [ inputs.self.modules.homeManager.sioyek ];
-  };
+      home-manager.sharedModules = [ inputs.self.modules.homeManager.sioyek ];
+    };
 
   flake.modules.homeManager.sioyek = {
     programs.sioyek = {
