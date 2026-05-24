@@ -15,6 +15,7 @@
         heroic
         sober
         stremio
+        sioyek
       ];
 
       users.users.nadeko = {
