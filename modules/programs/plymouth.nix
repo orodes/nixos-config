@@ -12,5 +12,6 @@
           })
         ];
       };
+      boot.kernelParams = [ "quiet" ];
     };
 }

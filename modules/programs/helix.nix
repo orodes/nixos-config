@@ -7,6 +7,8 @@
   flake.modules.homeManager.helix =
     { pkgs, lib, ... }:
     {
+      home.packages = [ pkgs.jdk21 ];
+
       programs.helix = {
         enable = true;
 
@@ -55,6 +57,8 @@
               command = lib.getExe' pkgs.clang-tools "clangd";
               args = [ "--clang-tidy" ];
             };
+
+            jdt-language-server.command = lib.getExe pkgs.jdt-language-server;
           };
 
           language = [
@@ -91,6 +95,7 @@
             }
             {
               name = "java";
+              language-servers = [ "jdt-language-server" ];
               indent = {
                 tab-width = 4;
                 unit = " ";
