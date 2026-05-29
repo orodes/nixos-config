@@ -16,6 +16,7 @@
         sober
         stremio
         sioyek
+        latex
       ];
 
       users.users.nadeko = {
