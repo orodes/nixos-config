@@ -123,6 +123,7 @@
 
       home.packages = with pkgs; [
         vesktop
+        libreoffice
       ];
 
       programs.noctalia-shell.settings = {
