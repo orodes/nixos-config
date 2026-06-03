@@ -59,6 +59,9 @@
       "Print".screenshot = _: { };
       "Ctrl+Print".screenshot-screen = _: { };
       "Alt+Print".screenshot-window = _: { };
+
+      "Mod+Shift+Ctrl+T".toggle-debug-tint = _: { };
+      "Mod+Shift+Ctrl+D".debug-toggle-damage = _: { };
     };
   };
 }
