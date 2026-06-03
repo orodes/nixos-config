@@ -1,5 +1,7 @@
 { inputs, ... }:
 {
+  flake.lib.niriSettings.nadeko = ./_settings-niri.nix;
+
   flake.modules.nixos.nh = {
     programs.nh.flake = "/home/nadeko/.config/nixos-config";
   };
