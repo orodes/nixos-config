@@ -327,11 +327,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1779427319,
-        "narHash": "sha256-Rn+L7AgcrpkSLNIsNZpaKLGHanwQQn8IzTBYZv3gXrc=",
+        "lastModified": 1780457772,
+        "narHash": "sha256-xYYY5fhBTOa96w8cUCGID/vvmzeAwVDobd149o3g3So=",
         "ref": "refs/heads/main",
-        "rev": "be08e3db64b91567b6dcffbac1323165a836455d",
-        "revCount": 10,
+        "rev": "e45ec4d3feb3c9464b5d21be639d498d1943eed8",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/orodes/nixos-secrets"
       },

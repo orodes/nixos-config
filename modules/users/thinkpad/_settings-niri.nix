@@ -62,6 +62,13 @@
 
       "Mod+Shift+Ctrl+T".toggle-debug-tint = _: { };
       "Mod+Shift+Ctrl+D".debug-toggle-damage = _: { };
+
+      "XF86AudioRaiseVolume".spawn-sh = "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
+      "XF86AudioLowerVolume".spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+      "XF86AudioMute".spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+      "XF86AudioMicMute".spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+      "XF86MonBrightnessUp".spawn-sh = "brightnessctl set 5%+";
+      "XF86MonBrightnessDown".spawn-sh = "brightnessctl set 5%-";
     };
   };
 }

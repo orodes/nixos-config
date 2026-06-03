@@ -17,6 +17,11 @@
         enable32Bit = true;
       };
 
+      services.libinput.touchpad = {
+        naturalScrolling = true;
+        tapping = true;
+      };
+
       environment.sessionVariables.NIXOS_OZONE_WL = "1";
     };
 }
